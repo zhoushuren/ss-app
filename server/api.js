@@ -10,7 +10,7 @@ exports.login = async function(ctx, next) {
   }
 }
 
-let host = 'http://127.0.0.1：6000'
+let host = 'http://127.0.0.1:6000'
 exports.config = async function(ctx, next) {
   let { uuid } = ctx.header
   if (!uuid) {
