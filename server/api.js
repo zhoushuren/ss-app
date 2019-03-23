@@ -10,6 +10,7 @@ exports.login = async function(ctx, next) {
   }
 }
 
+let host = 'http://127.0.0.1：6000'
 exports.config = async function(ctx, next) {
   let { uuid } = ctx.header
   if (!uuid) {
@@ -58,13 +59,13 @@ exports.config = async function(ctx, next) {
 //请求账户系统开通账号
 async function newAccount() {
   let portObj = await rp({
-    uri: 'http://127.0.0.1/app/newPort',
+    uri: host + '/app/newPort',
     method: 'get',
     json: true
   })
   if (portObj && portObj.port) {
     let obj = await rp({
-      uri: 'http://127.0.0.1/app/account',
+      uri:  host + '/app/account',
       method: 'post',
       body: {
         autoRemove: 0,
@@ -87,7 +88,7 @@ async function newAccount() {
 
 async function getAccount(id) {
   let res = await rp({
-    uri: 'http://127.0.0.1/app/account/' +id,
+    uri: host + '/app/account/' +id,
     json: true
   })
   return res
