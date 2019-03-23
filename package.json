@@ -16,12 +16,17 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
+    "bluebird": "^3.5.3",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
     "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
     "nuxt": "^2.4.0",
     "randomstring": "^1.1.5",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "sequelize": "^5.1.0",
     "vuetify": "^1.5.5",
     "vuetify-loader": "^1.2.1"
   },
