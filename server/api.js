@@ -84,6 +84,7 @@ async function newAccount() {
     })
     return obj.id
   }
+  console.error(portObj)
 }
 
 async function getAccount(id) {
