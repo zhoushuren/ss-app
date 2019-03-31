@@ -63,6 +63,8 @@ async function newAccount() {
     method: 'get',
     json: true
   })
+  console.log(portObj)
+  console.log(111111)
   if (portObj && portObj.port) {
     let obj = await rp({
       uri:  host + '/app/account',
