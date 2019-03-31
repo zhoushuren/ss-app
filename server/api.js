@@ -30,8 +30,8 @@ exports.config = async function(ctx, next) {
   }
   let data = await getAccount(id)
   let web_url = {
-    notify: 'http://walkout.ga/notify',
-    personal: 'http://walkout.ga/personal'
+    notify: 'http://app.awalkout.ga/notify',
+    personal: 'http://app.walkout.ga/personal'
   }
   if(data) {
     ctx.body = {
