@@ -74,10 +74,10 @@ async function newAccount() {
         limit: 1,
         multiServerFlow: 0,
         orderId: 0,
-        password: "2138713580",
+        password: Math.round(Math.random() * 10E10) ,
         port: portObj.port,
         server: null,
-        time: 1553228201393,
+        time: Date.now(),
         type: 5
       },
       json: true
