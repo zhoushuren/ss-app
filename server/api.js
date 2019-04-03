@@ -63,24 +63,22 @@ async function newAccount() {
     method: 'get',
     json: true
   })
-  console.log(portObj)
-  console.log(111111)
   if (portObj && portObj.port) {
     let obj = await rp({
-      uri:  host + '/app/account',
+      uri: host + '/app/account',
       method: 'post',
       body: {
-        autoRemove: 0,
+        autoRemove: 1,
         autoRemoveDelay: 0,
-        flow: 100000000,
-        limit: 1,
+        flow: 5000000000,
+        limit: 10,
         multiServerFlow: 0,
         orderId: 0,
         password: Math.round(Math.random() * 10E10) ,
         port: portObj.port,
         server: null,
         time: Date.now(),
-        type: 5
+        type: 4
       },
       json: true
     })
