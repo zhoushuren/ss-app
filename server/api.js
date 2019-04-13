@@ -34,10 +34,13 @@ exports.config = async function(ctx, next) {
     personal: 'http://app.walkout.ga/personal'
   }
   if(data) {
+    const arr = ['173.242.121.24', '67.230.176.41']
+    const index = Math.round(Math.random())
+    const ip = arr[index]
     ctx.body = {
       server: true,
       node_info: {
-        ip: '67.230.176.41',
+        ip: ip,
         port: data.port,
         password: data.password,
         method: 'aes-256-cfb',
@@ -70,15 +73,15 @@ async function newAccount() {
       body: {
         autoRemove: 1,
         autoRemoveDelay: 0,
-        flow: 5000000000,
+        flow: 20000000000,
         limit: 10,
-        multiServerFlow: 0,
+        multiServerFlow: 2,
         orderId: 0,
         password: Math.round(Math.random() * 10E10) ,
         port: portObj.port,
         server: null,
         time: Date.now(),
-        type: 4
+        type: 3
       },
       json: true
     })

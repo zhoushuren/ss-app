@@ -13,19 +13,19 @@
         用户ID：123
       </v-flex>
       <v-flex>
-        <UserInfo />
+        <Login />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-// import Login from '../components/Login'
-import UserInfo from '../components/UserInfo'
+import Login from '../components/Login'
+// import UserInfo from '../components/UserInfo'
 export default {
   components: {
-    // Login,
-    UserInfo
+    Login
+    // UserInfo
   }
 }
 </script>
