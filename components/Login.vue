@@ -54,7 +54,13 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
 
 export default {
   mixins: [validationMixin],
-
+  props: {
+    uuid: {
+      require: true,
+      default: '',
+      type: String
+    }
+  },
   validations: {
     name: { required, maxLength: maxLength(10) },
     email: { required, email },
@@ -105,8 +111,18 @@ export default {
     }
   },
   methods: {
-    submit() {
+    async submit() {
       this.$v.$touch()
+      const res = await this.$axios.$post('/api/user_signup', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        career: this.select,
+        uuid: this.uuid
+      })
+      if (res.success) {
+        console.log(res)
+      }
     }
   }
 }

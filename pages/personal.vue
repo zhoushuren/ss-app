@@ -10,10 +10,15 @@
         </v-avatar>
       </v-flex>
       <v-flex xs12 sm6 md8 align-center justify-center layout text-xs-center>
-        用户ID：123
+        {{ user_info.name || '我是一个游客' }}
       </v-flex>
       <v-flex>
-        <Login />
+        <UserInfo
+          v-if="is_login"
+          :name="user_info.name"
+          :email="user_info.email"
+        />
+        <Login v-else :uuid="uuid" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -21,11 +26,27 @@
 
 <script>
 import Login from '../components/Login'
-// import UserInfo from '../components/UserInfo'
+import UserInfo from '../components/UserInfo'
 export default {
   components: {
-    Login
-    // UserInfo
+    Login,
+    UserInfo
+  },
+  async asyncData(ctx) {
+    const { uuid } = ctx.query
+    const info = await ctx.$axios.$get('/api/get_user_info?uuid=' + uuid)
+    if (info.success) {
+      return {
+        uuid,
+        user_info: info.data,
+        is_login: true
+      }
+    }
+    return {
+      uuid,
+      is_login: false,
+      user_info: {}
+    }
   }
 }
 </script>

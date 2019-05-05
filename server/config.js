@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('ssapp', 'root', '', {
+const sequelize = new Sequelize('ssapp', 'root', '123456', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {

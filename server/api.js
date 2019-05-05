@@ -1,5 +1,7 @@
 const randomstring = require('randomstring')
 const user = require('./models/user')
+const UserInfo = require('./models/userInfo')
+const ShareCode = require('./models/ShareCode')
 const rp = require('request-promise')
 exports.login = async function(ctx, next) {
   const { uuid } = ctx.request.body
@@ -98,8 +100,70 @@ async function getAccount(id) {
   return res
 }
 
-
 exports.myAccount = async function(ctx) {
+  ctx.body = {
+    success: true
+  }
+}
+
+exports.saveUserInfo = async function(ctx) {
+  const {name, password, email, career, uuid} = ctx.request.body
+
+  const res = await user.findOne({ where: {uuid}})
+  if (!res) {
+    return
+  }
+  await UserInfo.create({
+    name,
+    password,
+    email,
+    career,
+    uuid,
+    user_id: res.dataValues.id
+  })
+  ctx.body = {
+    success: true
+  }
+}
+
+exports.getuserInfo = async function(ctx) {
+  let {uuid} = ctx.query
+
+  let res = await UserInfo.findOne({where: {uuid},attributes: ['name','user_id', 'uuid', 'email', 'created_at', 'career']})
+
+  if (!res) {
+    ctx.body = {
+      success: false,
+      data: {}
+    }
+    return
+  }
+
+  ctx.body = {
+    success: true,
+    data: res
+  }
+}
+
+// 填写邀请码
+exports.shareCode = async function(ctx) {
+  let {share_code,uuid} = ctx.request.body
+  let user_info = await UserInfo.findOne({where: {share_code}}) // 邀请我的用户
+  if(!user_info) {
+    return
+  }
+  let selfUser = await UserInfo.findOne({where: {uuid}}) //  自己
+
+  if (!selfUser) {
+    return
+  }
+
+  await ShareCode.create({
+    user_id: user_info.user_id,
+    share_user_id: selfUser.user_id,
+    share_code
+  })
+
   ctx.body = {
     success: true
   }

@@ -9,7 +9,7 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>ex@qq.com</v-list-tile-title>
+              <v-list-tile-title>{{ email }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset />
@@ -20,7 +20,7 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Jim</v-list-tile-title>
+              <v-list-tile-title>{{ name }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -47,7 +47,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    name: {
+      require: true,
+      default: '',
+      type: String
+    },
+    email: {
+      require: true,
+      default: '',
+      type: String
+    }
+  }
+}
 </script>
 
 <style scoped></style>
