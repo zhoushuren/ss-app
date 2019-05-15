@@ -49,7 +49,8 @@ export default {
     return {
       uuid,
       is_login: false,
-      user_info: {}
+      user_info: {},
+      account: info.account
     }
   }
 }
