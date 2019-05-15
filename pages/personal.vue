@@ -12,14 +12,17 @@
       <v-flex xs12 sm6 md8 align-center justify-center layout text-xs-center>
         {{ user_info.name || '我是一个游客' }}
       </v-flex>
-      <v-flex>
-        <UserInfo
-          v-if="is_login"
-          :name="user_info.name"
-          :email="user_info.email"
-        />
-        <Login v-else :uuid="uuid" />
+      <v-flex xs12 sm6 md8 align-center justify-center layout text-xs-center>
+        PORT:{{ account.port || '' }}
       </v-flex>
+      <!--<v-flex>-->
+      <!--<UserInfo-->
+      <!--v-if="is_login"-->
+      <!--:name="user_info.name"-->
+      <!--:email="user_info.email"-->
+      <!--/>-->
+      <!--<Login v-else :uuid="uuid" />-->
+      <!--</v-flex>-->
     </v-layout>
   </v-container>
 </template>
@@ -39,6 +42,7 @@ export default {
       return {
         uuid,
         user_info: info.data,
+        account: info.account,
         is_login: true
       }
     }

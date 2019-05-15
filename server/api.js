@@ -131,17 +131,26 @@ exports.getuserInfo = async function(ctx) {
 
   let res = await UserInfo.findOne({where: {uuid},attributes: ['name','user_id', 'uuid', 'email', 'created_at', 'career']})
 
+  let u = await user.findOne({where: {uuid}})
+  if (!u) {
+
+  }else {
+    id = u.account_id
+  }
+  let account = await getAccount(id)
   if (!res) {
     ctx.body = {
       success: false,
-      data: {}
+      data: {},
+      account
     }
     return
   }
 
   ctx.body = {
     success: true,
-    data: res
+    data: res,
+    account
   }
 }
 
