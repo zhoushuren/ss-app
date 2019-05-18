@@ -127,22 +127,26 @@ exports.saveUserInfo = async function(ctx) {
 }
 
 exports.getuserInfo = async function(ctx) {
-  let {uuid} = ctx.query
+  const {uuid} = ctx.query
 
-  let res = await UserInfo.findOne({where: {uuid},attributes: ['name','user_id', 'uuid', 'email', 'created_at', 'career']})
+  const res = await UserInfo.findOne({where: {uuid},attributes: ['name','user_id', 'uuid', 'email', 'created_at', 'career']})
 
-  let u = await user.findOne({where: {uuid}})
-  if (!u) {
-
-  }else {
-    id = u.account_id
+  const u = await user.findOne({where: {uuid}})
+  if(!u) {
+    return
   }
-  let account = await getAccount(id)
+  let account = await getAccount(u.account_id)
+
+  if(account === undefined) {
+    account = {}
+  }
+
   if (!res) {
     ctx.body = {
       success: false,
       data: {},
-      account
+      account,
+      account_id: u.account_id
     }
     return
   }
@@ -150,7 +154,8 @@ exports.getuserInfo = async function(ctx) {
   ctx.body = {
     success: true,
     data: res,
-    account
+    account,
+    account_id: u.account_id
   }
 }
 
