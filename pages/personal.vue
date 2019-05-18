@@ -13,6 +13,9 @@
         {{ user_info.name || '我是一个游客' }}
       </v-flex>
       <v-flex xs12 sm6 md8 align-center justify-center layout text-xs-center>
+        用户 Account:{{ account_id || '' }}
+      </v-flex>
+      <v-flex xs12 sm6 md8 align-center justify-center layout text-xs-center>
         PORT:{{ account.port || '' }}
       </v-flex>
       <!--<v-flex>-->
@@ -43,6 +46,7 @@ export default {
         uuid,
         user_info: info.data,
         account: info.account,
+        account_id: info.account_id,
         is_login: true
       }
     }
@@ -50,7 +54,8 @@ export default {
       uuid,
       is_login: false,
       user_info: {},
-      account: info.account
+      account: info.account,
+      account_id: info.account_id
     }
   }
 }
